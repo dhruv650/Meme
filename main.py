@@ -20,17 +20,18 @@ for i in interface.keys():
         print(f" - {i}")
 
 templete = input("Enter Your Templete: ")
-top_txt = input("Enter you top text: ").replace(" ",>
-bottom_txt = input("Enter your bootom text: ").repla>
-extension = input("Enter your extension(png, gif, je>
+top_txt = input("Enter you top text: ").replace(" ","_")
+bottom_txt = input("Enter your bootom text: ").replace('','_')
+extension = input("Enter your extension(png, gif, jpeg, webp): ")
 
 
-url_formation = f"{url}{interface[templete]}{top_txt>
-
+url_formation = f"{url}{interface[templete]}/{top_txt}/{bottom_txt}.{extension}"
 make_request = requests.get(url_formation)
-
 file_name = f"{interface[templete]}.{extension}"
 with open(file_name, "wb") as f:
     f.write(make_request.content)
+
+if make_request.status_code == 200:
+  print("Image Generated Successfully")
 print(f"Meme saved as: {file_name}")
 print(f"url: {url_formation}")
